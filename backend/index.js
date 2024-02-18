@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import { bookModel } from "./models/bookModel.js";
