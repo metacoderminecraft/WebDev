@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import BackButton from '../components/BackButton';
 import axios from 'axios';
 import { ThreeDots } from 'react-loading-icons';
+import { useSnackbar } from 'notistack';
 
 const DeleteAll = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDeleteBook = () => {
     setLoading(true);
@@ -14,12 +16,14 @@ const DeleteAll = () => {
       .delete(`http://localhost:5555/books`)
       .then(() => {
         setLoading(false);
+        enqueueSnackbar("Books deleted successfully", {variant:'success'});
         navigate('/');
       })
       .catch((error) => {
         setLoading(false);
-        alert('error');
         console.log(error);
+        enqueueSnackbar("Error", {variant:'error'});
+        navigate("/");
       })
   }
 
